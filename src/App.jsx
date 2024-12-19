@@ -4,7 +4,7 @@ import { login, logout } from "./store/AuthSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getCurrentUser } from "./backend/userApi/apiService";
-import MobilSideNav from "./components/Sidenav/MobilSideNav";
+// import MobilSideNav from "./components/Sidenav/MobilSideNav";
 import PostNav from "./components/PostNav";
 
 function App() {
@@ -52,9 +52,7 @@ function App() {
             </div>
           </div>
           <div className="row d-flex MobilSideNav d-md-none mt-">
-            <div className="col-12">
-              <MobilSideNav />
-            </div>
+            <div className="col-12">{/* <MobilSideNav /> */}</div>
           </div>
         </div>
       </main>
