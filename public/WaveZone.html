@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<!-- saved from url=(0029)http://localhost:5173/message -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script type="module">
+import RefreshRuntime from "/@react-refresh"
+RefreshRuntime.injectIntoGlobalHook(window)
+window.$RefreshReg$ = () => {}
+window.$RefreshSig$ = () => (type) => type
+window.__vite_plugin_react_preamble_installed__ = true
+</script>
+
+    <script type="module" src="./WaveZone_files/client"></script>
+
+    
+    <link rel="icon" type="image/svg+xml" href="http://localhost:5173/logo/logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./WaveZone_files/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="./WaveZone_files/remixicon.css" rel="stylesheet">
+    <link href="./WaveZone_files/remixicon(1).css" rel="stylesheet">
+    <link rel="stylesheet" href="./WaveZone_files/all.min.css">
+    <title>WaveZone</title>
+  <style type="text/css" data-vite-dev-id="F:/App/Production-App/Frontent/src/App.css">*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  /* background-color: rgb(0, 0, 0); */
+  color: white;
+}
+body{
+  background-color: black;
+}
+.active .button-list{
+  font-weight: 600;
+  font-size: 14px;
+
+}
+.active .side-nav-icon-btn {
+  background-color: rgb(32, 31, 31);
+  border-radius: 10px;
+}
+body{
+  min-height: 100vh;
+  background-color: black;
+}
+.logo{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  margin-left: 23px;
+  margin-top: 30px;
+  cursor: pointer;
+}
+.logo1{
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  margin-left: 50px;
+  color: white;
+}
+.login-page{
+  width: 100%;
+  align-items: center;
+}
+.login-page span{
+  padding-left: 80px;
+}
+.login-page h5{
+  padding-left: 180px;
+}
+.logo{
+  width: 100px;
+  border-radius: 50%;
+}
+.login-container{
+  width: 400px;
+  border: 1px solid  rgb(19, 19, 61);
+}
+.login-page-underline{
+  border: 1px solid rgb(36, 35, 35);
+  margin-top: 20px;
+}
+.create-account-btn{
+  margin-left: 30px;
+}
+input {
+  background-color: black;
+  border-radius: 5px;
+  color: white;
+  border: 1px solid rgb(17, 17, 17);
+  box-shadow: none;
+  outline: black;
+  outline-color: black;
+}
+.sginup-container {
+  width: 400px;
+  border: 1px solid  rgb(19, 19, 61);
+}
+.sginup-underline{
+  border: 1px solid rgb(20, 20, 20);
+  margin-top: 15px;
+}
+.button-list{
+  border: none;
+  font-size: 13px;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: transparent;
+}
+i{
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  background-color: transparent;
+  text-decoration: none;
+}
+li{
+  text-decoration: none;
+  color: black;
+}
+.homePage-route-hover{
+  font-weight: bold;
+  background-color: rgb(32, 31, 31);
+  border-radius: 10px;
+  transition: .2s;
+}
+.side-nav-icon-btn{
+  width:  100%;
+  height: 40px;
+}
+.side-nav-icon-btn:hover{
+   background-color: rgb(32, 31, 31);
+   border-radius: 10px;
+   transition: .2s;
+}
+.side-nav-icon-btn i {
+  margin-top: 4px;
+}
+button{
+  cursor: pointer;
+}
+.uplod-post-section{
+  margin-top: 20px;
+  padding-left: 17px;
+  padding-top: 5px;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+.uplod-post-section-content{
+  background-color: black;
+  border: 1px solid rgb(75, 73, 73);
+  position: absolute;
+  width: 260px;
+  min-width: 200px;
+  z-index: 1;
+  margin-top: 10px;
+  padding-left: 10px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  border-radius: 10px;
+  display: none;
+}
+.uplod-post-section-content i {
+  margin-left: 10px;
+}
+.uplod-post-section-content button{
+  font-size: 13px;
+}
+.uplod-post-section button{
+  border: none;
+  background-color: transparent;
+}
+.setting{
+  margin-top: 200px;
+  padding-left: 16px;
+}
+.setting:hover{
+  background-color: rgb(32, 31, 31);
+  border-radius: 10px;
+}
+ .teaxt-erea{
+  height: 100px;
+  size: 13px;
+  padding: 4px;
+ }
+ /* .sideNav{
+  border-right: 2px solid rgb(29, 28, 28);
+ } */
+ .cards img{
+  height: 350px;
+ }
+ .side-nav{
+  display: flex;
+  position: fixed;
+  margin-left: -50px;
+  margin-top: -15px;
+  padding-left: 20px;
+ }
+ .side-nav .side-nav-icon-btn .button-list{
+  width: 250px;
+ }
+ .components{
+  padding-left: -50px;
+  width: 250px;
+ }
+ .border-nav{
+  border-right: 1px solid   rgb(126, 125, 125);
+  height: 101vh;
+  margin-top: 15px;
+ }
+ .profail img{
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+ }
+ .Userprofail-img img{
+  height: 100px;
+  width: 100px;
+ }
+ .coverPhoto {
+  height: 400px;
+ }
+ .profailimg{
+  height: 100px;
+  width: 100px;
+  border-radius:  50%;
+ }
+ .cards{
+  width: 300px;
+ }
+ link{
+  display: none;
+ }
+ a{
+  text-decoration: none;
+ }
+ .side-nav{
+  position: fixed;
+  width: 65px;
+ }
+ .friend{
+  width: 900px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid white;
+ }
+ .btn-frend{
+  height: 40px;
+  width: 80px;
+ }
+ .pointer{
+  cursor: pointer;
+ }
+ .showmessage-input input{
+  height: 35px;
+  width: 200px;
+  margin-top: 200px;
+  padding: 5px;
+  border-radius: 7px;
+  border: 1px solid rgb(24, 24, 24);
+ }
+ .message-box{
+  margin-top: 150px;
+ }
+ .send-box{
+  margin-top: 193px;
+ }
+ .input{
+  width: 200px;
+ }
+ .text{
+  width: 100px;
+  height: 100px;
+ }
+ .img img{
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+ }
+ .message-profail{
+  background-color: rgb(29, 29, 29);
+  border-radius: 5px;
+ }
+ .profail-message-lock{
+  position: fixed;
+ }
+ .message-user {
+  text-align: right;
+  background-color: #e0f7fa;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 5px;
+  color: black;
+}
+
+.message-friend {
+  text-align: left;
+  background-color: #ffebee;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 5px;
+  color: black;
+}
+.friend-message {
+  background-color: #f1f1f1;
+  padding: 10px;
+  margin: 5px;
+  color: black;
+  border-radius: 10px;
+  max-width: 60
+}
+.MobilSideNav{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: #000000; 
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+.content{
+  height: 70px;
+  border-top: 1px solid rgb(34, 33, 33);
+}
+.mobile-nav-content{
+  display: flex;
+  justify-content: space-around;
+}
+.mobile-nav-uplod-btn{
+  font-size: 25px;
+  padding-top : -10px;
+  border-radius: 10px;
+}
+.user-profail-logo{
+  width: 50px;
+  background-color: transparent;
+}
+.user-content img{
+ width: 100%;
+}
+a{
+  text-decoration: none;
+  color: white;
+  /* font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; */
+  font-size: 14px;
+}
+.post-nav-icon button{
+  border: none;
+}
+.post-nav-icon{
+  width: 240px;
+  text-align: center;
+  height: 100%;
+  padding-top: 15px;
+}
+.post-nav-icon:hover{
+   background-color: rgb(34, 33, 33);
+  transition: .2s;
+}
+.active .post-nav-icon{
+  font-weight: 800;
+}
+.post-nav{
+ position: fixed;
+ width: 500px;
+ border-left: 1px solid rgb(126, 125, 125);
+ border-right: 1px solid rgb(126, 125, 125);
+ border-bottom: 1px solid rgb(126, 125, 125);
+ height: 60px;
+ /* margin-left: -10px; */
+
+ }
+ .post-nav-btn{
+  background-color: transparent;
+}
+.post-nav-link{
+  background-color: transparent;
+}
+
+span{
+  background-color: transparent;
+}
+.post-cards-components{
+  margin-top: px;
+}
+.post-cards{
+  width: 500px;
+  border: 1px solid rgb(126, 125, 125);
+  border-radius: 2px;
+  /* margin-left: -10px; */
+  margin-top: 75px;
+}
+.post-cards .title{
+  font-size: 13px;
+}
+.post-cards video{
+    width: 100%;
+}
+
+@media(max-width: 767px){
+  .post-cards{
+    width: 95%;
+    margin-left: 0px;
+  }
+  .post-cards .video{
+    width: 60vw;
+    margin-left: 50px;
+  }
+  .post-nav{
+    position: fixed;
+    width: 84%;
+  }
+}
+@media(max-width:573px){
+   .post-nav{
+    position: fixed;
+    margin-left: -90px;
+   }
+   .post-cards{
+    width: 100%;
+    margin-left: -20px;
+   }
+  
+}
+@media(max-width:240px){
+  .post-nav{
+    position: fixed;
+    width: 40%;
+  }
+}
+.post-cards .user-profail-section img{
+  margin-top: -82px;;
+}
+.user-profail-section .report-icon{
+  margin-top: -40px;
+}
+.post-share-like-view i{
+   color:rgb(172, 161, 161);
+   font-size: 12px;
+}
+.user-content{
+  height: 300px;
+  width: 460px;
+
+  border-radius: 30px;
+}
+.user-content video{
+  border-radius: 20px;
+  margin-top: 20px;
+  display: inline-block;
+}
+.post-cards .title {
+  margin-top: -24px;
+}
+.video {
+  width: 100%;
+  height: auto;
+}
+.post-cards .user-profail-img img{
+  margin-left: -13px;
+}
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(20, 22, 49, 0.5); /* Semi-transparent background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  /* background-color: rgb(0, 0, 0); */
+}
+/* Centered popup content */
+.popup-content {
+  background-color: rgb(0, 0, 0);
+  padding: 20px;
+  border-radius: 20px;
+  max-width: 700px;
+  max-height: 600px;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  /* box-shadow: 0 4px 8px rgba(59, 57, 57, 0.2); */
+}
+.popup-content .title-hading{
+  width: 440px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.close-btn-section{
+  border-bottom: 1px solid rgb(34, 33, 33);
+  display: flex;
+  width: 100%;
+  height: 45px;
+  
+}
+.close-btn-section button{
+  border: none;
+  background-color: transparent;
+  margin-top: -10px;
+  margin-right: 10px;
+}
+.popup-overlay .uplod-fiels{
+  margin-top: 100px;
+}
+.popup-overlay .uplod-fiels .custom-upload-button{
+  height: 100px;
+  width: 100px;
+  background-color: #1a1919;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 50px;
+}
+.custom-upload-button i{
+  font-size: 30px;
+  color: #9b9494;
+}
+.popup-overlay .uplod-fiels button{
+  border: none;
+  background-color: rgb(255, 252, 252);
+  color: #000000;
+  height: 30px;
+  width: 75px;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 13px;
+}
+.warning-message-for-user{
+  margin-top: 80px;
+  font-size: 11px;
+}
+.warning-message-for-user a{
+  color: rgb(8, 8, 235);
+}
+.uplod-video-file-next-btn{
+   margin-left: 291px; 
+}
+.user-uplod-detels textarea{
+   background-color: rgb(12, 12, 12);
+   font-size: 13px;
+   padding-left: 6px;
+   padding-top: 2px;
+   padding-right: 6px;
+   height: 160px;
+   max-height: 160px;
+}
+.post-from-length-count{
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.postFrom-message-fro-user span{
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.post-from-btn{
+  border: none;
+  color: black;
+  width: 75px;
+  font-size: 13px;
+  font-weight: 600;
+  height: 30px;
+  border-radius: 10px;
+}
+.warning-message-for-user-to{
+  font-size: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-top: 200px;
+}
+.warning-message-for-user-to a {
+  color: blue;
+  font-size: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.more-togal-section{
+  margin-top: -60px;
+  margin-left: 20px;
+}
+.side-nav-icon-btn{
+  padding-left: -30px;
+  cursor: pointer;
+}
+.side-nav-icon-btn button{
+  font-size: 15px;
+}
+.uplod-post-section .uplod-post-section-i{
+  margin-top: -1px;
+}
+.uplod-post-section .uplod-btn-sideNav{
+  margin-top: -5px;
+}
+ /* .more-icone-btn{
+  margin-right: 50px;
+}
+.more-toggole-open  button{
+  background-color: #000000;
+  border: none;
+  background: transparent;
+} */
+ .more-btn-section .more-icon{
+  margin-top: -1px;
+ }
+ .more-btn-section .more-btn{
+  margin-top: -6px;
+ }
+.more-btn-section{
+  margin-top: 115px;
+  padding-left: 15px;
+  padding-top: 5px;
+} 
+.more-toggole-open{
+  margin-top: 120px;
+  background-color: black;
+  border-radius: 5px;
+  width: 260px;
+  border: 1px solid rgb(75, 73, 73);
+  position: absolute;
+  min-width: 100px;
+  z-index: 1;
+  margin-top: 10px;
+  padding-left: 10px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  border-radius: 10px;
+  display: none;
+}
+.more-toggole-open i {
+  padding-left: 8px;
+  font-size: 18px;
+  padding-top: 3px;
+}
+.more-toggole-open .logout-btn-icon{
+  color: red;
+}
+.more-toggole-open button{
+  border: none;
+  background-color: transparent;
+  margin-left: 10px;
+}
+.uplod-btn-sideNav{
+  padding-top: -3px;
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: 13px;
+}
+.outlet-container{
+  margin-left: -300px;
+}
+.videoPage-nav-bar .nav-ber{
+  font-size: 30px;
+  padding-bottom: 3px;
+  border-bottom: 1px solid rgb(75, 73, 73);
+}
+.videoPage-nav-bar .nav-ber a {
+  font-size: 20px;
+  font-weight: 700;
+}
+.videoPage-nav-bar .nav-ber .active{
+  border-bottom: 2px solid white;
+}
+.videoPage-nav-bar .video-page-input-box{
+  border-bottom: 1px solid rgb(75, 73, 73);
+  height: 40px;
+ 
+}
+.videoPage-nav-bar .video-page-input-box input{
+  /* background-color: #1a1919; */
+  width: 100%;
+  height: 100%;
+  padding-left: 15px;
+ font-size: 13px;
+ font-family: Arial, Helvetica, sans-serif;
+}
+/* .video-page .video{
+  width: 150px;
+} */
+/* .video-page .video-item{
+  width: 300px;
+} */
+.video-page .video-item video{
+  width: 100%;
+  height: auto;
+  max-width: 100%; 
+}
+.video-page .video-components .video-item{
+  /* width: 380px; */
+  border: 1px solid rgb(75, 73, 73);
+
+}
+.video-page .video-components .video-item .views-love-coments i{
+  font-size: 0.8rem;
+}
+.video-page .video-components .video-item .views-love-coments{
+  font-size: 0.8rem;
+}
+.video-page .video-components .video-item .video-analyse-icon{
+  height: 2rem;
+  width: 2rem;
+  font-size: 1rem;
+  text-align: center;
+  padding-top: 3px;
+}
+.video-page .video-components .video-item .video-analyse-icon:hover{
+  background-color: #1a1919;
+  border-radius: 50%;
+  transition: .5s;
+}
+.video-page .video-components .video-item .title{
+  width: 250px;
+  font-size: 13px;
+  margin-left: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+video{
+  cursor: pointer;
+}
+.pop-up-blog-from{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(20, 22, 49, 0.5); /* Semi-transparent background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.blog-from-content{
+  background-color: rgb(0, 0, 0);
+  padding: 20px;
+  border-radius: 20px;
+  max-width: 1000px;
+  max-height: 600px;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+.pop-up-blog-from .nav{
+  border-bottom: 1px solid rgb(31, 30, 30);
+ 
+}
+.pop-up-blog-from .blog-from-content .blog-title input{
+    padding: 10px;
+}
+.pop-up-blog-from .blog-from-content .blog-content textarea{
+  background-color: #000000;
+  width: 100%;
+  margin-top: 10px;
+  max-height: 300px;
+  min-height: 300px;
+  padding-left: 4px;
+  padding-right: 3px;
+  padding-bottom: 3px;
+}
+.pop-up-blog-from .blog-from-content .btnn{
+ 
+  font-weight: 500;
+}
+.pop-up-blog-from .blog-from-content .warning-message-for-user p{
+   margin-top: -40px;
+}
+.pop-up-blog-from .blog-from-content .warning-message-for-user i{
+  margin-top: -44px;
+  margin-right: 5px;
+}
+.blog-photo-warning-massage p {
+  margin-top: 3px;
+  font-size: 13px;
+  margin-left: 3px;
+  margin-top: 80px;
+}
+.blog-photo-warning-massage i {
+  margin-top:  75px;
+}
+.blog-photo-warning-massage a {
+  color: blue;
+}
+.blog-card{
+  border: 1px solid rgb(126, 125, 125);
+  margin-top: 35px;
+  width: 100%;
+}
+.blog-card .blog-card-content .profail-img img{
+ width: 50px;
+}
+.blog-card  i {
+  font-size: 18px;
+}
+.blog-card  .contents span{
+  font-size: 14px;
+ 
+}
+.blog-card .user-profail img{
+  width: 80%;
+  border-radius: 10px;
+}
+.like {
+  cursor: pointer;
+}
+@media(max-width : 1117px){
+  .blog-card{
+    margin-left: 35px;
+  }
+}
+@media(max-width : 992px){
+  .blog-card{
+    margin-left: 0px;
+  }
+}
+.blog-card .contents a{
+  cursor: pointer;
+}
+.blog-components{
+  border: 1px solid rgb(75, 73, 73);
+  width: 505px;
+}
+.blog-components .blog-img{
+   width: 100%;
+}
+.blog-components .title {
+  width: 80%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.blog-components .title span {
+  font-size: 1rem;
+}
+.blog-components .blog-content{
+  font-size: 0.9rem;
+}
+.blog-components .views-love-coments i {
+  font-size: 0.9rem;
+  cursor: not-allowed;
+}
+
+ .blog-components .blog-analyse-icon{
+  height: 2rem;
+  width: 2rem;
+  font-size: 1rem;
+  text-align: center;
+  padding-top: 3px;
+}
+ .blog-components .blog-analyse-icon:hover{
+  background-color: #1a1919;
+  border-radius: 50%;
+  transition: .5s;
+}
+@media(max-width : 2800px){
+  .blog-components{
+    width: 50%;
+  }
+  .blog-page .nav-ber{
+    width: 50%;
+  }
+  .blog-input-page{
+    width: 50%;
+  }
+  .profail-page .coverPhoto{
+    height: 100%;
+    width: 100%;
+  }
+  .profail-page{
+    width: 70%;
+  }
+  .profail-page .profail-img img {
+    width: 100%;
+    height: 60%;
+  }
+  .profail-img{
+    width: 120px;
+  }
+  .profail-page .user-profail-info{
+    margin-left: -150px;
+    margin-top: 5px;
+  }
+  .profail-page .ful-name{
+    width: 400px;
+    /* background-color: #c4bebe; */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin-left: 70px;
+  }
+}
+@media(max-width : 992px){
+  .blog-components{
+    width: 90%;
+  }
+  .blog-Page h5{
+    text-align: start;
+  }
+  .blog-page .nav-ber{
+    width: 100%;
+  }
+  .blog-input-page{
+    width: 100%;
+  }
+  .profail-page .coverPhoto{
+    height: 100%;
+    width: 100%;
+  }
+  .profail-page{
+    width: 100%;
+  }
+  .profail-page .user-profail-info{
+    margin-left: -0px;
+    margin-top: 5px;
+  }
+}
+@media(max-width : 420px){
+  .blog-components{
+    width: 100%;
+  }
+  .blog-page .nav-ber{
+    width: 100%;
+  }
+  .blog-input-page{
+    width: 100%;
+  }
+  .profail-page .coverPhoto{
+    height: 50%;
+    width: 100%;
+  }
+}
+@media(max-width : 767px){
+ 
+  .profail-page .coverPhoto{
+    height: 100%;
+    width: 100%;
+  }
+}
+.profail-page .userName{
+  color: #312f2f;
+  width: 300px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-left: 50px;
+}
+.profail-page .profail-img{
+  margin-top: -70px;
+}
+.profail-page .profail-img img{
+  border-radius: 50%;
+}
+.profail-page .coverPhoto{
+  border-radius: 10px;
+}
+.profail-page .edite-profailt-btnn button{
+  height: 30px;
+  width: 100px;
+  border: 1px solid rgb(202, 197, 197);
+  background-color: #000000;
+  text-align: center;
+  margin-left: 20px;
+  border-radius: 50px;
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.profail-page .edite-profailt-btnn button:hover{
+  background-color: #1d1c1c;
+  transition: .5s;
+}
+.profail-page .userName{
+  margin-right: -10px;
+}
+.edite-popup-profail .profail-img-user{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-top: -55px;
+  object-fit: cover;
+  border: 2px solid #ccc;
+}
+.edite-popup-profail .camera-icon-coverimg i{
+  font-size: 18px;
+  margin-top: 4px; 
+  margin-left: 1px;  
+}
+.edite-popup-profail .cover-img{
+  /* position: -webkit-sticky; */
+  border-radius: 10px;
+}
+.edite-popup-profail .camera-icon-coverimg{
+  height: 40px; 
+  width: 40px;
+  background: #000000;
+  margin-top: -220px;
+  margin-left: 300px;
+  border-radius: 50%;
+}
+.edite-popup-profail .user-profail-img-uplod-camra-icon{
+  height: 30px; 
+  width: 30px;
+  background: #000000;
+  margin-top: -63px;
+  margin-left: 47px;
+  border-radius: 50%;
+}
+.edite-popup-profail .user-profail-img-uplod-camra-icon i {
+  font-size: 13px;
+  margin-left: -3px;
+  margin-top: 3px;
+}
+.edite-popup-profail .edite-prfoail-input{
+  height: 40px;
+  padding-left: 10px;
+  font-size: 13px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.edite-popup-profail .btn-save{
+  background-color: rgb(255, 248, 248);
+  color: #000000;
+  height: 30px;
+  width: 50px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  margin-top: 2px;
+}
+.edite-popup-profail .cover-img-byDefult{
+  height: 365px;
+  background-color: #0f0e0e;
+  border-radius: 10px;
+}
+img{
+  cursor: pointer;
+}
+.profail-page .btn .profail-user-videos-post-btn{
+      border: 1px solid rgb(255, 249, 249);
+      background-color: #000000;
+      width: 110px;
+      height: 30px;
+      border-radius: 15px;
+      font-size: 10px;
+       font-weight: bold;
+       font-style: italic;
+}
+.profail-page .btn .profail-user-videos-post-btn:hover{
+  font-style: normal;
+}
+.profail-page .active{
+  border-bottom: 3px solid whitesmoke;
+}
+.profail-page .btn{
+  border: none;
+}
+.profail-page .btn .delete-account{
+  font-size: 10px;
+}
+.edite-popup-content{
+  overflow-y: scroll; 
+  overflow-x: hidden;
+  overflow: auto;
+}
+.scrollable-div::-webkit-scrollbar {
+  width: 8px; /* scrollbar-এর প্রস্থ */
+  background-color: #000000; /* scrollbar-এর ব্যাকগ্রাউন্ড */
+  cursor: pointer;
+}
+
+.scrollable-div::-webkit-scrollbar-thumb {
+  background-color: #3b3636; /* scrollbar-এর থাম্ব (ড্র্যাগিং পার্ট) */
+  border-radius: 4px; /* গোলাকার প্রান্ত */
+}
+
+.border-profaile-page{
+  border: 1px solid rgb(43, 41, 41);
+}
+.message-page .user-friend-section{
+  height: 100vh;
+  border-right: 1px solid rgb(44, 43, 43);
+  
+}
+.message-page .user-friend-img img{
+  width: 45px;
+}
+.message-page input{
+  border: 1px solid rgb(43, 41, 41);
+  width: 100%;
+  margin-top: 20px;
+  height: 35px;
+  border-radius: 20px;
+  padding-left: 10px;
+  font-size: 13px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.message-page .user-name{
+  color: #6b6868;
+  font-size: 14px;
+}
+.message-page .message-time{
+  color: #696262;
+}
+.message-page .ful-name{
+  font-size: 15px;
+  color: #c4bebe;
+}
+.message-page .message{
+  margin-top: -24px;
+  font-size: 13px;
+}
+.message-page .message span{
+  color: #c4bebe;
+}
+.message-page .message-time{
+  font-size: 15px;
+}
+.message-page .dot{
+  border: 1px solid #5c5a5a;
+  height: 1px;
+  margin-top: 20px;
+}
+.message-page .user-friend-info{
+  /* background-color: #1a1919; */
+  border-bottom-width: 10px;
+  border-right: 2px solid rgb(0, 110, 255);
+  height: 45px;
+ /* width: 400px; */
+ cursor: pointer;
+}
+.message-page .message-section .message-user-friend-section{
+  position: fixed;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.message-page .message-section img{
+  width: 100px;
+  border-radius: 50%;
+}
+.message-page .message-section .user-profail-box{
+  margin-top: 20px;
+}
+.message-page .message-section .message-section-user-joinby-flowers {
+  font-size: 12px;
+  margin-top: 10px;
+}
+.message-section-user-joinby-flowers .join-date{
+  color: #1a1919;
+}
+.message-section-user-joinby-flowers .followers{
+  color: #1a1919;
+}
+.message-page .message-section .user-name span{
+  font-size: 13px;
+  color: #312f2f;
+}
+.message-page .message-section .borderr{
+  border: 1px solid rgb(27, 27, 27);
+  margin-top: 60px;
+  margin-left: 25px;
+}
+.message-page .user-message .massage-user-box span{
+  font-size: 13px;
+}
+.message-page .user-message .massage-user-box .message{
+  background-color: rgb(0, 110, 255);
+  padding: 13px;
+  border-top-left-radius: 40px;
+  border-bottom-left-radius: 40px;
+  border-top-right-radius: 40px;
+  max-width: 150px;
+  width: 100%;
+}
+/* .message-page .massage-user-box{
+  width: 150px;
+} */
+.message-page .message-time-box .message-time{
+  font-size: 12px;
+  margin-top: 10px;
+  color: #575555;  
+}
+.message-page .friend-message-box .friend-messages{
+  background-color: rgb(0, 110, 255);
+  padding: 13px;
+  border-top-right-radius: 40px;
+  border-bottom-right-radius: 40px;
+  border-top-left-radius: 40px;
+  max-width: 150px;
+  width: 100%;
+}
+.message-page .message-input-box{
+  height: 35px;
+  bottom: 0;
+
+}
+.message-page .message-input-box input{
+  padding-left: 20px;
+}
+.message-input-box {
+  position: fixed; /* Fixed at the bottom */
+  bottom: 0; /* Stick to the bottom */
+  right: 0; /* Align to the left of the screen */
+  width: 50%; /* Full width */
+  margin-bottom: 25px; /* Optional background for clarity */
+  /* padding: 10px; Add some padding for better UI */
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow for better design */
+  z-index: 1000; /* Keep it above other elements */
+}
+.message-page {
+  position: relative;
+  padding-bottom: 60px; /* Leave space for fixed input box */
+}
+.message-section {
+  height: calc(100vh - 60px); /* Adjust height excluding the input box */
+  overflow-y: auto; /* Allow scrolling if content overflows */
+}
+.message-page .send-message-input{
+  border: 1px solid rgb(32, 32, 32);
+  border-radius: 20px;
+  padding: 9px;
+  padding-left: 15px;
+  font-size: 13px;
+  background-color: #000000;
+  width: 600px;
+  margin-left: 10px;
+}
+.message-page .message-box{
+  min-height: 40px;
+  max-height: 100px;
+  /* height: 45px; */
+  display: flex;
+}
+.message-page .message-box .img-icon{
+  margin-left: -50px;
+  margin-right: 20px;
+}
+.message-page .message-send-btn{
+  margin-left: -30px;
+  color: rgb(0, 110, 256);
+  font-size: 17px;
+}
+.message-page .message-input-box i {
+  color: rgb(0, 110, 256);
+  font-size: 17px;
+}
+
+.img-imoji-icon{
+  padding: 10px;
+  background-color: rgb(1, 15, 36);
+  border-radius: 50px;
+}
+.img-imoji-icon:hover{
+  color: black;
+  transition: .5s;
+}
+.notification-page{
+  width: 700px;
+  height: 60px;
+}
+.notification-page .notification{
+  cursor: pointer;
+}
+.notification-page .message-info img{
+  width: 50px;
+  border-radius: 50%;
+}
+.notification-page .notification-message{
+  font-size: 14px;
+}
+.notification-page .notification-video-icon{
+  padding-top: 20px;
+  margin-left: -15px;     
+}
+.notification-page .time{
+  margin-left: 30px;
+  font-size: 12px;
+}
+.notification-border:hover{
+  width: 100%;
+  border: 1px solid rgb(87, 82, 82);
+ 
+}
+.search-page .search-input{
+  padding-left: 15px;
+  font-size: 13px;
+  height: 40px;
+  width: 400px;
+  border: 1px solid rgb(65, 61, 61);
+  border-radius: 20px;
+  margin-left: 25px;
+  /* position: relative; */
+}
+.search-page .search-box{
+  border-left: 1px solid rgb(35, 32, 32);
+  border-right: 1px solid rgb(35, 32, 32);
+  width: 450px;
+  height: 100vh;
+}
+.search-page .border-nav-in-search-box{
+  border:1px solid rgb(35, 32, 32);
+  margin-top: 9px;
+}
+.search-page .top-search a{
+  color: #312f2f;
+}
+.search-page .top-search  .active{
+ color: white;
+ border-bottom: 3px solid rgb(0, 110, 255);
+}
+
+.deleteVideo-pop-up{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(20, 22, 49, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.delete-Video-content{
+  background-color: rgb(0, 0, 0);
+  padding: 20px;
+  border-radius: 20px;
+  max-width: 550px;
+  max-height: 300px;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+}
+.delete-Video-content input{
+  cursor: pointer;
+}
+.video-page .uplod-time{
+  font-size: 13px;
+}
+.create-new-message-pop-up{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(20, 22, 49, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.create-new-message-pop-up-content{
+  background-color: rgb(0, 0, 0);
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 400px;
+  max-height: 400px;
+  height: 100%;
+  width: 100%;
+  text-align: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.create-new-message-pop-up .nav-section{
+  border-bottom: none;
+}
+.create-new-message-pop-up .nav-input input{
+ height: 30px;
+ font-size: 13px;
+ padding-left: 10px;
+ font-family: Arial, Helvetica, sans-serif;
+ border: none;
+}
+.create-new-message-pop-up .nav-input{
+  border-top: 1px solid rgb(32, 31, 31);
+  border-bottom: 1px solid rgb(32, 31, 31);
+}
+.create-new-message-pop-up .btn-create{
+  height: 30px;
+  background-color: rgb(218, 207, 207);
+  color: black;
+  margin-top: 3px;
+  width: 55px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  
+}
+.create-new-message-pop-up .btn-create:hover{
+  background-color: rgb(242, 235, 235);
+  
+}
+.create-new-message-pop-up .select-user-section .img{
+  width: 40px;
+  height: 40px;
+}
+.create-new-message-pop-up .select-user-section img{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%; 
+}
+.create-new-message-pop-up .select-user-section .full-name{
+  font-size: 15px;
+  margin-left: -3px;
+}
+.create-new-message-pop-up .select-user-section .userName{
+  font-size: 12px;
+  margin-top: -4px;
+}
+.create-new-message-pop-up  .select-user-section-user-profail{
+  cursor: pointer;
+  transition: .3s;
+}
+.create-new-message-pop-up .select-user-section-user-profail:hover{
+  cursor: pointer;
+  background-color: #1a1919;
+  border-radius: 10px;
+}
+</style></head>
+  <body>
+    <div id="root"><main class=""><div class="container-fluid"><div class="row"><div class="col-lg-2 d-none d-md-block col-md-2  d-flex justify-content-center sideNav"> <div class="side-nav "><div class=" components"><div class=" border-nav pt-5"><h5 class="fw-bold logo1 d-md-none d-lg-block">WaveZone</h5><ul class="pt-4"><li><a class="" href="http://localhost:5173/"><div class="side-nav-icon-btn  mt-3 d-flex "><i class="ri-home-4-line px-3 "></i> <button class="button-list text-start d-md-none d-lg-block">Home</button></div></a></li><li><a class="" href="http://localhost:5173/explor"><div class="side-nav-icon-btn  mt-3 d-flex "><i class="ri-search-line px-3 "></i> <button class="button-list text-start d-md-none d-lg-block">Explore</button></div></a></li><li><a class="" href="http://localhost:5173/notification"><div class="side-nav-icon-btn  mt-3 d-flex "><i class="ri-notification-line px-3 "></i> <button class="button-list text-start d-md-none d-lg-block">Notification</button></div></a></li><li><a class="active" href="http://localhost:5173/message" aria-current="page"><div class="side-nav-icon-btn  mt-3 d-flex "><i class="ri-messenger-line px-3 "></i> <button class="button-list text-start d-md-none d-lg-block">Message</button></div></a></li><li><a class="" href="http://localhost:5173/profail"><div class="side-nav-icon-btn  mt-3 d-flex "><i class="ri-user-line px-3 "></i> <button class="button-list text-start d-md-none d-lg-block">Profail</button></div></a></li><div class="uplod-post-section side-nav-icon-btn d-flex"><i class="ri-video-upload-line  uplod-post-section-i"></i><button class="uplod-btn-sideNav  d-md-none d-lg-block">Uplod</button><div class="uplod-post-section-content mt-5 "> <a class="d-flex side-nav-icon-btn" href="http://localhost:5173/message"><i class="ri-video-line"></i><button class="uplod-video-btn fw-bold px-3">Uplod video</button></a><a class="d-flex side-nav-icon-btn" href="http://localhost:5173/"><i class="ri-draft-line"></i><button class="uplod-video-btn fw-bold px-3">Create blog</button></a></div></div><div class="more-btn-section side-nav-icon-btn d-flex"><i class="ri-menu-line more-icon"></i><button class="button-list more-btn px-3 pt-1 text-start d-md-none d-lg-block">More</button><div class="more-toggole-open mt-5 "> <a class="d-flex side-nav-icon-btn  mt-1" href="http://localhost:5173/message"><i class="ri-profile-fill "></i><button class="add-existing-account fw-bold ">Add an existing account</button></a><a class="d-flex side-nav-icon-btn my-2 mt-1 " href="http://localhost:5173/message"><i class="ri-logout-box-line logout-btn-icon"></i><button class="log-out-btn   fw-bold">Log out</button></a></div></div></ul></div></div></div></div><div class="col-lg-10 mr-5 d-flex justify-content-center  px-5 col-md-10 col-12 app-outlet-coponents"><div class="container-fluid  message-page"><div class="row"><div class="col-4 user-friend-section"><input type="text" placeholder="Search people"><div class="row mt-1"><div class="col-12 mt-4 user-friend-img user-friend-info"><div class="div d-flex"><img src="./WaveZone_files/rendom-img.png" alt="img"><span class="fw-bold ful-name mt-1">MD JONY</span> <span class="mx-1 user-name mt-1">@jony66</span>.<span class="message-time mt-1">1h</span></div><div class="div message mx-5"><span class="">hello</span></div></div></div></div><div class="col-8 message-section d-flex justify-content-center"><div class="d-flex justify-content-center align-items-center"><div class="div"><div><h4>Select a message</h4></div><div class="div"><span class="text-muted">Choose from your existing conversations, start a new one, <br> or just keep swimming.</span></div><button class="btn btn-primary fw-bold mt-2">New message</button></div></div></div></div></div></div></div><div class="row d-flex MobilSideNav d-md-none mt-"><div class="col-12"><div class="content "><ul class="d-flex mobile-nav-content"><li><a class="" href="http://localhost:5173/"><div class=" mt-3"><i class="ri-home-line "></i> </div></a></li><li><a class="" href="http://localhost:5173/explor"><div class=" mt-3"><i class="ri-search-line "></i> </div></a></li><li><a class="" href="http://localhost:5173/uplod"><div class=" mt-3"><i class="ri-add-line mobile-nav-uplod-btn bg-primary"></i> </div></a></li><li><a class="" href="http://localhost:5173/message"><div class=" mt-3"><i class="ri-messenger-line "></i> </div></a></li><li><a class="" href="http://localhost:5173/notification"><div class=" mt-3"><i class="ri-notification-line "></i> </div></a></li><li><a class="" href="http://localhost:5173/profail"><div class=" mt-3"><i class="ri-user-line "></i> </div></a></li></ul></div></div></div></div></main></div>
+    <script type="module" src="./WaveZone_files/main.jsx"></script>
+    <script src="./WaveZone_files/bootstrap.bundle.min.js.download" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  
+
+<div class="create-new-message-pop-up"><div class="create-new-message-pop-up-content scrollable-div"><div class="container-fluid"><div class="row"><div class="col-12 d-flex nav-section close-btn-section justify-content-between"><div class="close-popup-btn d-flex"><button class=""><i class="ri-close-large-line"></i></button><span class="fw-bold mt-1 mx-2">New message</span></div><button class="btn-create">create</button></div></div><div class="row"><div class="col-12 d-flex nav-input"><i class="ri-search-line text-primary"></i><input type="text" class="w-100" placeholder="Search people"></div></div><div class="row select-user-section w-100 mt-1"><div class="col-12 mt-3 d-flex w-100 select-user-section-user-profail"><div class="img"><img src="./WaveZone_files/rendom-img.png" alt=""></div><div class="name"><div class="full-name"><span class="fw-bold full-name">MD Jony</span></div><div class="userName"><span class="userName">@mdjony55</span></div></div></div><div class="col-12 mt-3 d-flex w-100 select-user-section-user-profail"><div class="img"><img src="./WaveZone_files/rendom-img.png" alt=""></div><div class="name"><div class="full-name"><span class="fw-bold full-name">MD Jony</span></div><div class="userName"><span class="userName">@mdjony55</span></div></div></div><div class="col-12 mt-3 d-flex w-100 select-user-section-user-profail"><div class="img"><img src="./WaveZone_files/rendom-img.png" alt=""></div><div class="name"><div class="full-name"><span class="fw-bold full-name">MD Jony</span></div><div class="userName"><span class="userName">@mdjony55</span></div></div></div></div></div></div></div></body></html>

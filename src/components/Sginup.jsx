@@ -12,38 +12,23 @@ function Sginup() {
   const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
 
-  const handleRefresh = () => {
-    setTimeout(() => {
-      window.location.reload();
-    }, 3000);
+  const pageRefreshHandeler = () => {
+    window.location.reload();
   };
-
-  // const create = async (data) => {
-  //   setError("");
-  //   try {
-  //     const userData = await authservice.createAccount(data);
-  //     if (userData) {
-  //       const data = await authservice.getCurrentUser();
-  //       if (data) {
-  //         dispatch(login(data));
-  //         navigate("/");
-  //       }
-  //     }
-  //   } catch (error) {
-  //     setError(error.message);
-  //   }
-  // };
 
   const create = async (data) => {
     setError("");
     try {
-      // console.log("data", data);
+      console.log("data", data);
       const userData = await registerUser(data);
+      console.log("register-userdata userData", userData);
       if (userData) {
         const data = await getCurrentUser();
+        console.log("get currentuser", data);
         dispatch(login(data));
-        console.log("data", data);
+        console.log("login data", data);
         navigate("/");
+        pageRefreshHandeler();
       }
       // console.log("user regester successfull");
     } catch (error) {
@@ -102,7 +87,7 @@ function Sginup() {
 
               <Button
                 type="submit"
-                className="btn fw-bold btn-primary text-center w-50 mt-3 my-3"
+                className="btn mt-3 fw-bold btn-primary text-center w-50 mt-3 my-3"
                 // onClick={handleRefresh}
               >
                 Sgin up

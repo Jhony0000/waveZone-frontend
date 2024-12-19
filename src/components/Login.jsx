@@ -29,6 +29,9 @@ function Login() {
   //     setError(error.message);
   //   }
   // };
+  const pageRefreshHandeler = () => {
+    window.location.reload();
+  };
 
   const LoginAccount = async (data) => {
     try {
@@ -36,14 +39,15 @@ function Login() {
       const userData = await loginUser(data);
       console.log("login successfull in login page");
       if (userData) {
-        console.log("userData", userData);
+        // console.log("userData", userData);
         const data = await getCurrentUser();
-        console.log("data", data);
+        // console.log("data", data);
         dispatch(authLogin(data));
         navigate("/");
-        console.log("success login");
+        pageRefreshHandeler();
+        // console.log("success login");
       }
-      console.log("login successfully");
+      // console.log("login successfully");
     } catch (error) {
       setError(error?.message || "Login faild");
     }

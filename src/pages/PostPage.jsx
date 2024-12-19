@@ -1,6 +1,6 @@
 import React from "react";
 import PostNav from "../components/PostNav";
-import { PostCard } from "../components";
+import { VideoCard } from "../components";
 function PostPage() {
   return (
     <div className="container-fluid">
@@ -11,7 +11,7 @@ function PostPage() {
       </div>
       <div className="row mt-5">
         <div className="col-lg-12 col-12">
-          <PostCard />
+          <VideoCard />
         </div>
       </div>
     </div>

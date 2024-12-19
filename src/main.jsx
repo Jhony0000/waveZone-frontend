@@ -4,7 +4,7 @@ import App from "./App.jsx";
 import "./App.css";
 import store from "./store/store.js";
 import { Provider } from "react-redux";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import SginupPage from "./pages/SginupPage.jsx";
@@ -19,7 +19,15 @@ import AllFriends from "./pages/AllFriends.jsx";
 import Message from "./pages/Message.jsx";
 import ShowMessage from "./pages/ShowMessage.jsx";
 import PostPage from "./pages/PostPage.jsx";
+import VideoPage from "./pages/VideoPage.jsx";
+import UplodBlogPage from "./pages/UplodBlogPage.jsx";
 import BlogPage from "./pages/BlogPage.jsx";
+import ProfailVideosPage from "./pages/profail-pages/ProfailVideosPage.jsx";
+import ProfailBlogsPage from "./pages/profail-pages/ProfailBlogsPage.jsx";
+import NotificationPage from "./pages/NotificationPage.jsx";
+import SearchPage from "./pages/SearchPage.jsx";
+import MessageSendOutLet from "./pages/messageSendOutlet/MessageSendOutLet.jsx";
+import VideoChart from "./pages/videoAnalyzePage/VideoChart.jsx";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +36,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: (
+          <AuthLayout authentication>
+            <Home />
+          </AuthLayout>
+        ),
       },
       {
         path: "/login",
@@ -55,12 +67,30 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/profail",
+        path: "/profail/:id",
         element: (
           <AuthLayout authentication>
             <Profail />
           </AuthLayout>
         ),
+        children: [
+          {
+            path: "/profail/:id",
+            element: (
+              <AuthLayout authentication>
+                <ProfailVideosPage />
+              </AuthLayout>
+            ),
+          },
+          {
+            path: "profail/blog/:id",
+            element: (
+              <AuthLayout authentication>
+                <ProfailBlogsPage />
+              </AuthLayout>
+            ),
+          },
+        ],
       },
       {
         path: "/profail/createprofail",
@@ -111,6 +141,14 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "/message-send/:id",
+        element: (
+          <AuthLayout authentication>
+            <MessageSendOutLet />
+          </AuthLayout>
+        ),
+      },
+      {
         path: "/message/:ID",
         element: (
           <AuthLayout authentication>
@@ -131,6 +169,46 @@ const router = createBrowserRouter([
         element: (
           <AuthLayout authentication>
             <BlogPage />
+          </AuthLayout>
+        ),
+      },
+      {
+        path: "/uplod-blog",
+        element: (
+          <AuthLayout authentication>
+            <UplodBlogPage />
+          </AuthLayout>
+        ),
+      },
+      {
+        path: "/uplod-video",
+        element: (
+          <AuthLayout authentication>
+            <VideoPage />
+          </AuthLayout>
+        ),
+      },
+      {
+        path: "/notification",
+        element: (
+          <AuthLayout authentication>
+            <NotificationPage />
+          </AuthLayout>
+        ),
+      },
+      {
+        path: "/explor",
+        element: (
+          <AuthLayout authentication>
+            <SearchPage />
+          </AuthLayout>
+        ),
+      },
+      {
+        path: "/video-analytice/:videoId",
+        element: (
+          <AuthLayout authentication>
+            <VideoChart />
           </AuthLayout>
         ),
       },

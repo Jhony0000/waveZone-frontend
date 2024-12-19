@@ -4,17 +4,20 @@ import { Link } from "react-router-dom";
 
 function MobilSideNav() {
   const auhtStutes = useSelector((state) => state.auth.status);
+  const userData = useSelector((state) => state.auth.userData);
   const [uplodBtntnclassName, setUplodBtnClassName] = useState(
     "mobile-nav-uplod-btn bg-primary"
   );
 
   const navItems = [
     {
+      name: "Home",
       url: "/",
       active: auhtStutes,
       icon: "ri-home-line",
     },
     {
+      name: "explore",
       url: "/explor",
       active: auhtStutes,
       icon: "ri-search-line",
@@ -26,17 +29,20 @@ function MobilSideNav() {
       icon: "ri-add-line",
     },
     {
+      name: "Message",
       url: "/message",
       active: auhtStutes,
       icon: "ri-messenger-line",
     },
     {
+      name: "Notification",
       url: "/notification",
       active: auhtStutes,
       icon: "ri-notification-line",
     },
     {
-      url: "/profail",
+      name: "Profail",
+      url: `/profail/${userData.data._id}`,
       active: auhtStutes,
       icon: "ri-user-line",
     },
@@ -46,7 +52,7 @@ function MobilSideNav() {
       <ul className="d-flex mobile-nav-content">
         {navItems.map((items) =>
           items.active ? (
-            <li key={items.name} className="">
+            <li key={items.name}>
               <Link className="" to={items.url}>
                 <div className=" mt-3">
                   <i

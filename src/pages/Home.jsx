@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import service from "../appwrite/Service";
-import { PostCard } from "../components/index";
+import VideoCard from "../components/VideoCard";
 import { NavLink } from "react-router-dom";
 import PostNav from "../components/PostNav";
 
@@ -18,11 +18,10 @@ function Home() {
   // }, []);
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-12">
-          <PostNav />
-        </div>
+    <div className="home-page">
+      <PostNav />
+      <div>
+        <VideoCard />
       </div>
     </div>
   );

@@ -1,0 +1,316 @@
+import React, { useEffect, useState } from "react";
+import { Link, Outlet, useNavigate, useParams } from "react-router-dom";
+import Service from "../appwrite/Service";
+import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useCallback } from "react";
+import EditeProfailPopUp from "../components/popupComponents/EditeProfailPopUp";
+import {
+  deleteAccoutn,
+  getUserProfail,
+  userFollow,
+} from "../backend/userApi/apiService";
+import io from "socket.io-client";
+import { socket } from "../socket";
+import { deleteUserAllVideo } from "../backend/videoApi/videoApi";
+
+// const socket = io.connect("http://localhost:8000");
+function Profail() {
+  const navigate = useNavigate();
+  const [profailImg, setProfailImg] = useState("");
+  const [coverImg, setCoverImg] = useState("");
+  const [userName, setuserName] = useState();
+  const [posts, setPosts] = useState([]);
+  const [isopentEaditeProfailPopUp, setIsOpenEaditeProfailPopUp] =
+    useState(false);
+  const userData = useSelector((state) => state.auth.userData);
+  console.log("userData", userData);
+  const { id } = useParams();
+  const [getUserProfaill, setGetUserProfail] = useState({});
+  const [isFollow, setIsFollow] = useState();
+
+  const handelRefreshPage = () => {
+    window.location.reload();
+  };
+  // useEffect(() => {
+  //   async function fatchUserFromfail() {
+  //     try {
+  //       const userProfail = await Service.alluserinfo(userData.$id);
+  //       console.log("User Profile Data:", userProfail);
+
+  //       if (userProfail.userCoverImg) {
+  //         const ProfailImg = await Service.getFilePreviewProfailImg(
+  //           userProfail.userImg
+  //         );
+  //         const CoverImg = await Service.getFilePreviewProfailImg(
+  //           userProfail.userCoverImg
+  //         );
+
+  //         setProfailImg(ProfailImg);
+  //         setCoverImg(CoverImg);
+  //         setuserName(userProfail.userName);
+  //       } else {
+  //         console.log("Missing userImg or userCoverImg in profile data");
+  //       }
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  //   fatchUserFromfail();
+  // }, [userData.$id]);
+
+  // useEffect(() => {
+  //   async function allFriend() {
+  //     const data = await Service.showFriend(userData.$id);
+  //     console.log("all friend", data);
+  //     setPosts(data.documents);
+
+  //     try {
+  //     } catch (error) {
+  //       console.log("allFriend error", error);
+  //     }
+  //   }
+  //   allFriend();
+  // }, [userData.$id]);
+
+  // useEffect(() => {
+  //   async function allFriendTo() {
+  //     const data = await Service.showFrindTo(userData.$id);
+  //     console.log("all friend", data);
+  //     setPosts(data.documents);
+
+  //     try {
+  //     } catch (error) {
+  //       console.log("allFriend error", error);
+  //     }
+  //   }
+  //   allFriendTo();
+  // }, [userData.$id]);
+  useEffect(() => {
+    const getProfail = async () => {
+      try {
+        const response = await getUserProfail(id);
+        setGetUserProfail(response.data.data);
+        console.log("get user profail response", response);
+      } catch (error) {
+        console.log("get user profail page error", error);
+      }
+    };
+    if (id) {
+      getProfail();
+    }
+  }, [userData.data._id]);
+
+  useEffect(() => {
+    if (id) {
+      console.log("Joining Room:", id); // Debugging
+      socket.emit("joinRoom", id);
+    }
+  }, [userData.data._id]);
+
+  useEffect(() => {
+    // Listen for real-time updates
+    socket.on("followStatusChanged", (data) => {
+      console.log("Follow status changed:", data); // Debugging
+      if (data.followingId === id) {
+        setGetUserProfail((prev) => ({
+          ...prev,
+          isFollowers: data.isFollowers,
+          followersCount: data.followersCount,
+        }));
+      }
+
+      if (data.followerId === userData.data._id) {
+        setGetUserProfail((prev) => ({
+          ...prev,
+          followingCount: data.followingCount,
+        }));
+      }
+    });
+
+    return () => {
+      socket.off("followStatusChanged");
+    };
+  }, [id, userData.data._id]);
+
+  let userFollow = getUserProfaill.followersCount;
+
+  const followUser = useCallback(() => {
+    socket.emit("toggleFollow", {
+      followerId: id,
+      followingId: userData.data._id,
+    });
+    setGetUserProfail((prev) => ({
+      ...prev,
+      isFollowers: !prev.isFollowers,
+      followersCount: prev.isFollowers
+        ? prev.followersCount - 1
+        : prev.followersCount + 1,
+    }));
+  }, [id, userData.data._id]);
+
+  console.log("getUserprofail", getUserProfaill);
+  const openEditeProfailPopUp = () => {
+    setIsOpenEaditeProfailPopUp(true);
+  };
+
+  const closeEditeProfailPopUp = () => {
+    setIsOpenEaditeProfailPopUp(false);
+  };
+
+  const DeleteAccount = async () => {
+    try {
+      // First, attempt to delete user videos
+      const videoDeletion = await deleteUserAllVideo(userData.data._id);
+      if (videoDeletion) {
+        // Assuming the response has a 'success' flag
+        console.log("User videos deleted successfully.");
+        // Now proceed to delete the account
+        await deleteAccoutn();
+        handelRefreshPage();
+        navigate("/login");
+      } else {
+        console.log("Failed to delete videos.");
+        // Handle the case where video deletion fails
+      }
+    } catch (error) {
+      console.log("Error during account deletion process:", error);
+    }
+  };
+
+  console.log("isfoloers", getUserProfaill.isFollowers);
+  return (
+    <div>
+      <div className="container-fluid profail-page  ">
+        {isopentEaditeProfailPopUp && (
+          <EditeProfailPopUp onClose={closeEditeProfailPopUp} />
+        )}
+        <div className="row ">
+          <div className="col-12 text-center">
+            <div className="div Userprofail-img">
+              <div className={`div ${!userData.data.coverImg && "d-none"}`}>
+                <img
+                  className="coverPhoto"
+                  src={`${getUserProfaill ? getUserProfaill.coverImg : ""}`}
+                  alt=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className={`row ${!userData.data.coverImg && "mt-5"}`}>
+          <div
+            className={`col-12 d-flex justify-content-between ${
+              !getUserProfaill.coverImg && "mt-5"
+            }`}
+          >
+            <div className="d-flex profail-img mx-3">
+              <img src={`${getUserProfaill.avatar}`} alt="" />
+            </div>
+            <div className="user-profail-info">
+              <div className="full-name">
+                <h5 className="fw-bold ful-name">
+                  {getUserProfaill && getUserProfaill.FulName}
+                </h5>
+              </div>
+
+              <div className="userName">
+                {" "}
+                <span className="user-name ">
+                  {getUserProfaill && getUserProfaill.userName}
+                </span>
+              </div>
+              <div className="div d-flex mt-3">
+                <div className="join-by">
+                  <i class="ri-calendar-check-line text-muted"></i>{" "}
+                  <span className="text-muted">
+                    {getUserProfaill && getUserProfaill.createdAt
+                      ? (() => {
+                          const date = new Date(getUserProfaill.createdAt);
+                          return `${date.getDate()}/${
+                            date.getMonth() + 1
+                          }/${date.getFullYear()}`;
+                        })()
+                      : null}
+                  </span>
+                </div>
+                <div className="flowers mx-4">
+                  <Link>
+                    {userFollow}
+                    <span className="text-muted">Followers</span>
+                  </Link>
+                  <Link className="mx-3">
+                    {getUserProfaill.followingCount}{" "}
+                    <span className="text-muted">Following</span>
+                  </Link>
+                </div>
+              </div>
+              {id === userData.data._id && (
+                <div className="btn d-flex">
+                  <Link to="/uplod-video">
+                    {" "}
+                    <button className="mx-3 user-videos profail-user-videos-post-btn">
+                      See your videos
+                    </button>
+                  </Link>
+                  <Link to="/uplod-blog">
+                    {" "}
+                    <button className="user-post profail-user-videos-post-btn">
+                      See your blogs
+                    </button>
+                  </Link>
+                </div>
+              )}
+            </div>
+            {id === userData.data._id && (
+              <div className="edite-profailt-btnn mt-3 d-flex">
+                <button className="" onClick={openEditeProfailPopUp}>
+                  Edit profile
+                </button>
+                <button className="delete-account" onClick={DeleteAccount}>
+                  Delete account
+                </button>
+              </div>
+            )}
+            {/* {id !== userData.data._id && getUserProfail.isFollowers && (
+              <button className="btn btn-danger" onClick={followUser}>
+                unfollow
+              </button>
+            )} */}
+            {id !== userData.data._id && (
+              <div>
+                {getUserProfaill.isFollowers ? (
+                  <button className="btn btn-danger" onClick={followUser}>
+                    Unfollow
+                  </button>
+                ) : (
+                  <button className="btn btn-success" onClick={followUser}>
+                    Follow
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+        <div className="row mt-4 mx-3">
+          <div className="col-12 d-flex">
+            <NavLink to={`/profail/${id}`} className="fw-bold" end>
+              Videos
+            </NavLink>
+            <NavLink to={`profail/blog/${id}`} className="mx-5 fw-bold">
+              Blogs
+            </NavLink>
+          </div>
+        </div>
+      </div>
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-12 border-profaile-page"></div>
+        </div>
+        <Outlet />
+      </div>
+    </div>
+  );
+}
+
+export default Profail;

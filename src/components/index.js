@@ -3,7 +3,7 @@ import Button from './Button'
 import Input from './Input'
 import Login from './Login'
 import Sginup from './Sginup'
-import PostCard from './PostCard'
+import VideoCard from './VideoCard'
 import PostFrom  from  './PostFrom/PostFrom'
 import CreateFrom  from './CreateProfailFrom/CreateFrom'
 import Addfriend from './AddFriend Request Button/Addfriend'
@@ -14,7 +14,7 @@ export {
  Input,
  Login,
  Sginup,
- PostCard,
+ VideoCard,
  PostFrom,
  CreateFrom,
  Addfriend

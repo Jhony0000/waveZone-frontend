@@ -1,128 +1,202 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import Service from "../appwrite/Service";
+import React, { useEffect, useState, useCallback, useRef } from "react";
+import {
+  Link,
+  Outlet,
+  useNavigate,
+  useParams,
+  NavLink,
+} from "react-router-dom";
 import { useSelector } from "react-redux";
+import EditeProfailPopUp from "../components/popupComponents/EditeProfailPopUp";
+import { deleteAccoutn, getUserProfail } from "../backend/userApi/apiService";
+import { socket } from "../socket";
+import { deleteUserAllVideo } from "../backend/videoApi/videoApi";
+import LoadingBar from "react-top-loading-bar";
+
+import { format, formatDate } from "date-fns";
 
 function Profail() {
-  const [profailImg, setProfailImg] = useState("");
-  const [coverImg, setCoverImg] = useState("");
-  const [userName, setuserName] = useState();
-  const [posts, setPosts] = useState([]);
+  const ref = useRef(null);
+  const navigate = useNavigate();
+  const { id } = useParams();
   const userData = useSelector((state) => state.auth.userData);
-  console.log(userData);
+  const [getUserProfaill, setGetUserProfail] = useState({});
+  const [isopentEaditeProfailPopUp, setIsOpenEaditeProfailPopUp] =
+    useState(false);
 
   useEffect(() => {
-    async function fatchUserFromfail() {
+    ref.current.continuousStart();
+    const getProfail = async () => {
       try {
-        const userProfail = await Service.alluserinfo(userData.$id);
-        // ইউজার আইডি যাচাই করুন
-        console.log("User Profile Data:", userProfail);
-
-        if (userProfail.userCoverImg) {
-          const ProfailImg = await Service.getFilePreviewProfailImg(
-            userProfail.userImg
-          );
-          const CoverImg = await Service.getFilePreviewProfailImg(
-            userProfail.userCoverImg
-          );
-
-          setProfailImg(ProfailImg);
-          setCoverImg(CoverImg);
-          setuserName(userProfail.userName);
-        } else {
-          console.log("Missing userImg or userCoverImg in profile data");
-        }
+        const response = await getUserProfail(id);
+        setGetUserProfail(response.data.data);
       } catch (error) {
-        console.log(error);
+        console.log("Error fetching profile", error);
+      } finally {
+        ref.current.complete(); // Complete the loading bar
       }
-    }
-    fatchUserFromfail();
-  }, [userData.$id]);
+    };
+    if (id) getProfail();
+  }, [id]);
 
-  useEffect(() => {
-    async function allFriend() {
-      const data = await Service.showFriend(userData.$id);
-      console.log("all friend", data);
-      setPosts(data.documents);
+  const followUser = useCallback(() => {
+    socket.emit("toggleFollow", {
+      followerId: id,
+      followingId: userData.data._id,
+    });
+    setGetUserProfail((prev) => ({
+      ...prev,
+      isFollowers: !prev.isFollowers,
+      followersCount: prev.isFollowers
+        ? prev.followersCount - 1
+        : prev.followersCount + 1,
+    }));
+  }, [id, userData.data._id]);
 
-      try {
-      } catch (error) {
-        console.log("allFriend error", error);
-      }
-    }
-    allFriend();
-  }, [userData.$id]);
-
-  useEffect(() => {
-    async function allFriendTo() {
-      const data = await Service.showFrindTo(userData.$id);
-      console.log("all friend", data);
-      setPosts(data.documents);
-
-      try {
-      } catch (error) {
-        console.log("allFriend error", error);
-      }
-    }
-    allFriendTo();
-  }, [userData.$id]);
+  const DeleteAccount = async () => {
+    await deleteUserAllVideo(userData.data._id);
+    await deleteAccoutn();
+    navigate("/login");
+  };
 
   return (
-    <div className="container-fluid border">
-      <div className="row ">
-        <div className="col-12 text-center">
-          <div className="div Userprofail-img">
-            <div className="div">
-              {profailImg ? (
-                <img src={profailImg} className="w-100 coverPhoto" alt="..." />
-              ) : (
-                <img
-                  className="w-100 coverPhoto"
-                  src="/Unknown cover-photo.jpg"
-                  alt="..."
-                />
-              )}
+    <div className="profail-page">
+      <LoadingBar color="#f11946" ref={ref} />
+      {isopentEaditeProfailPopUp && (
+        <EditeProfailPopUp onClose={() => setIsOpenEaditeProfailPopUp(false)} />
+      )}
+      {/* Cover Photo */}
+      <div className="Userprofail-img">
+        {getUserProfaill.coverImg && (
+          <img
+            src={getUserProfaill.coverImg}
+            alt="Cover"
+            className="user-cover-photo"
+          />
+        )}
+      </div>
+
+      {/* User Info */}
+      <div className="row mx-4 user-section">
+        <div className="col-12 d-flex  user-deteles-section d-flex justify-content-between">
+          <div className="user-detels d-flex">
+            <img
+              className="user-profail-img"
+              src={getUserProfaill.avatar}
+              alt="Avatar"
+            />
+            <div className="div user-name-section mt-4">
+              <div className="ful-namee">
+                <h6 className="fw-bold ">
+                  {getUserProfaill.FulName}
+                  xcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxxcxcxcx
+                </h6>
+              </div>
+
+              <div className="user-namee ">
+                <span>
+                  @{getUserProfaill.userName}
+                  xcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxc
+                </span>
+              </div>
             </div>
-            <div className=" d-flex justify-content-center">
-              {coverImg ? (
-                <img src={coverImg} className="profailimg" alt="..." />
-              ) : (
-                <img src="/rendom-img.png" alt="..." />
-              )}
-            </div>
-            <div className="userNmae mt-3">
-              {userName && <span className="text-center mt-3">{userName}</span>}
-            </div>
-            <div className="userBtn mt-3">
-              {!coverImg ? (
-                <Link to="/profail/createprofail">
-                  <button className="btn btn-success mt-3">
-                    CreateProfail
-                  </button>
-                </Link>
-              ) : null}
-            </div>
-            <div className="userEditebtn">
-              {coverImg && (
-                <Link to="/profail/Eadite">
-                  <button className="btn btn-success mx-4">
-                    EaditeProfail
-                  </button>
-                </Link>
-              )}
-            </div>
-            {posts.length > 0 ? (
-              <Link to="allfriends">
+
+            {/* </div> */}
+          </div>
+
+          <div className="div user-profail-edit-delete-btn-section px-3">
+            {id === userData.data._id && (
+              <div className="edite-profailt-btnn ">
+                <button onClick={() => setIsOpenEaditeProfailPopUp(true)}>
+                  Edit Profile
+                </button>
+                <button className="delete-account" onClick={DeleteAccount}>
+                  Delete Account
+                </button>
+              </div>
+            )}
+            {id !== userData.data._id && (
+              <button
+                className={`btn w-25 ${
+                  getUserProfaill.isFollowers ? "btn-danger" : "btn-success"
+                }`}
+                onClick={followUser}
+              >
+                {getUserProfaill.isFollowers ? "Unfollow" : "Follow"}
+              </button>
+            )}
+          </div>
+        </div>
+
+        <div className="flowers d-flex">
+          <Link>{getUserProfaill.followersCount} Followers</Link>
+          <Link className="mx-4">
+            {getUserProfaill.followingCount} Following
+          </Link>
+        </div>
+        <div className="date px-3">
+          <span>
+            {getUserProfaill.createdAt
+              ? format(new Date(getUserProfaill.createdAt), "dd-MMM-yyyy")
+              : "Date not available"}
+          </span>
+        </div>
+        <div className="btn">
+          {id === userData.data._id && (
+            <div className="edite-profailt-btnn ">
+              <Link to="/uplod-video">
                 {" "}
-                <div className="btn btn-success mt-4">All Friends</div>
+                <button>Video</button>
               </Link>
-            ) : null}
+              <Link to="/uplod-blog">
+                <button className="delete-account">Blog</button>
+              </Link>
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="row">
+        <div className="col-12">
+          <div className="div user-profail-edit-delete-btn-section-mobile px-3">
+            {id === userData.data._id && (
+              <div className="edite-profailt-btnn ">
+                <button onClick={() => setIsOpenEaditeProfailPopUp(true)}>
+                  Edit Profile
+                </button>
+                <button className="delete-account" onClick={DeleteAccount}>
+                  Delete Account
+                </button>
+              </div>
+            )}
+            {id !== userData.data._id && (
+              <button
+                className={`btn w-25 ${
+                  getUserProfaill.isFollowers ? "btn-danger" : "btn-success"
+                }`}
+                onClick={followUser}
+              >
+                {getUserProfaill.isFollowers ? "Unfollow" : "Follow"}
+              </button>
+            )}
           </div>
         </div>
       </div>
-      <div className="row mt-5">
-        <div className="col-12mt-3"></div>
+      {/* Navigation */}
+      <div className="row  mt-5 d-flex mx-3">
+        <div className="div ">
+          <NavLink to={`/profail/${id}`} className="" end>
+            Videos
+          </NavLink>
+        </div>
+        <div className="div blog-page-btn mx-5">
+          <NavLink to={`profail/blog/${id}`} className="mx-5 ">
+            Blogs
+          </NavLink>
+        </div>
       </div>
+
+      <div className="border-profaile-page"></div>
+      <Outlet />
     </div>
   );
 }

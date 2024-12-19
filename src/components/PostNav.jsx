@@ -8,25 +8,31 @@ function PostNav() {
       url: "/",
     },
     {
-      name: "Post",
-      url: "/post",
-    },
-    {
       name: "Blog",
       url: "/blog",
     },
   ];
+
   return (
-    <div className="d-flex post-nav justify-content-between border">
-      {postNavItems.map((items) => (
-        <li key={items.name} className="d-flex ">
-          <NavLink to={items.url} className="post-nav-link">
-            <div className="post-nav-icon">
-              <span className="post-nav-btn">{items.name}</span>
-            </div>
-          </NavLink>
-        </li>
-      ))}
+    <div className="container-fluid">
+      <div className="row">
+        <div className="col-12 d-flex justify-content-center">
+          <ul className="post-nav">
+            {postNavItems.map((items) => (
+              <li key={items.name}>
+                <NavLink
+                  to={items.url}
+                  className={({ isActive }) =>
+                    isActive ? "post-nav-link active" : "post-nav-link"
+                  }
+                >
+                  <button className="post-nav-btn">{items.name}</button>
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }

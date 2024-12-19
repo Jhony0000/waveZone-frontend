@@ -5,9 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getCurrentUser } from "./backend/userApi/apiService";
 import MobilSideNav from "./components/Sidenav/mobilSideNav";
+import PostNav from "./components/PostNav";
 
 function App() {
   const [loding, setLoding] = useState(true);
+  const [laptopScreenLength, setLeptopScreenLength] = useState("992");
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.auth.userData);
 
@@ -24,6 +26,7 @@ function App() {
   //     .finally(() => setLoding(false));
   //   console.log("loding finished");
   // }, []);
+
   useEffect(() => {
     getCurrentUser().then((userData) => {
       if (userData) {
@@ -38,11 +41,13 @@ function App() {
       <main className="">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-lg-4 d-none d-md-block col-md-4  d-flex justify-content-center sideNav">
+            <div className="col-lg-2 d-none d-md-block col-md-2  d-flex justify-content-center sideNav">
               {" "}
               <Sidenav />
             </div>
-            <div className="col-lg-8 mr-5 pt-3 px-5 col-md-8 col-12 app-outlet-coponents">
+            <div
+              className={`col-lg-10 mr-5 d-flex justify-content-center  px-5 col-md-10 col-12 app-outlet-coponents`}
+            >
               <Outlet />
             </div>
           </div>
