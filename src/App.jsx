@@ -4,7 +4,7 @@ import { login, logout } from "./store/AuthSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getCurrentUser } from "./backend/userApi/apiService";
-import MobilSideNav from "./components/Sidenav/mobilSideNav";
+import MobilSideNav from "./components/Sidenav/MobilSideNav";
 import PostNav from "./components/PostNav";
 
 function App() {
