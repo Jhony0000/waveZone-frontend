@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import authService from "../appwrite/Auth";
+// import authService from "../appwrite/Auth";
 import { login as authLogin } from "../store/AuthSlice";
 import { loginUser, getCurrentUser } from "../backend/userApi/apiService";
 import { useDispatch } from "react-redux";

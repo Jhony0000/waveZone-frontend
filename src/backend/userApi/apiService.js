@@ -8,19 +8,17 @@ const registerUser = async ({ FulName, email, password, userName }) => {
     formData.append('password', password);
     formData.append('FulName', FulName);
     formData.append('userName', userName);
-
+       
     try {
+     
         const response = await axios.post(`${user_api_url}/register`, formData);
-        console.log('register-response', response);
-
         // Access the access token from the response's message
         const { message: accessToken } = response.data;
-        console.log('register-accessToken', accessToken);  // Log access token
-
+  
         if (accessToken) {
             // Store the access token in localStorage
             localStorage.setItem('accessToken', accessToken);
-            console.log('Token stored successfully');
+       
         } else {
             console.log('Access token is undefined');
         }
@@ -36,10 +34,11 @@ const registerUser = async ({ FulName, email, password, userName }) => {
 const loginUser = async (data) => {
     try {
         // console.log('data' , data)
-        const response = await axios.post(`${user_api_url}/login` , data )
-        console.log('tokens',response)
+      
+        const response = await axios.post(`${user_api_url}/login` , data)
+        // console.log('tokens',response)
         const { accessToken, refreshToken } = response.data.data;
-
+ 
         if (accessToken && refreshToken) {
            
             localStorage.removeItem('accessToken');
@@ -48,7 +47,7 @@ const loginUser = async (data) => {
             localStorage.setItem('accessToken', accessToken);
             localStorage.setItem('refreshToken', refreshToken);
          
-            console.log('Tokens stored successfully'); 
+            // console.log('Tokens stored successfully'); 
         } else {
             console.log('Access token or refresh token is undefined');
         }
@@ -62,7 +61,7 @@ const loginUser = async (data) => {
 const getCurrentUser = async () => {
   try {
      const token = localStorage.getItem('accessToken');
-     console.log('token',token)
+    //  console.log('token',token)
      if (!token) {
         console.log('token not found');
         return null;
@@ -193,10 +192,11 @@ const deleteAccoutn = async() => {
     }
 }
 
-const getUserProfail = async(id) => {
+const getUserProfail = async({id,loggedInUserId}) => {
+    console.log('id',id)
     try {
         const token = localStorage.getItem('accessToken')
-        return await axios.post(`${user_api_url}/get-user-profail`,{id},
+        return await axios.post(`${user_api_url}/get-user-profail`,{id,loggedInUserId},
           {
             withCredentials:true,
             headers:{

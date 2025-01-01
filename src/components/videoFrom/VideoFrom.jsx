@@ -32,6 +32,7 @@ function VideoFrom({ onClose, videoFile, parantClose }) {
         userId: userData.data._id,
       });
       console.log("response", response);
+
       onClose();
       parantClose();
       navigate("/uplod-video");

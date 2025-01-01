@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import authservice from "../appwrite/Auth";
 import { login } from "../store/AuthSlice";
 import { getCurrentUser, registerUser } from "../backend/userApi/apiService";
 import { useForm } from "react-hook-form";
 import { Input, Button } from "./index";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+
 function Sginup() {
   const [error, setError] = useState("");
   const navigate = useNavigate();

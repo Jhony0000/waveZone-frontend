@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
 import { searchUser } from "../../backend/messageApi/messageApi";
+import { useEffect } from "react";
+import { useRef } from "react";
 
 function CreateNewMessagePopUp({ onClose }) {
   const [searchUserr, setSearchUser] = useState([]);
+  const popupRef = useRef(null);
   // const [name, setName] = useState("");
 
   const searchUsers = async (e) => {
@@ -16,12 +19,29 @@ function CreateNewMessagePopUp({ onClose }) {
     }
   };
 
+  const handleClickOutside = (event) => {
+    if (popupRef.current && !popupRef.current.contains(event.target)) {
+      onClose();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // Cleanup the event listener
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   console.log("search result", searchUserr);
   console.log("name", name);
 
   return ReactDOM.createPortal(
     <div className="create-new-message-pop-up">
-      <div className="create-new-message-pop-up-content scrollable-div">
+      <div
+        ref={popupRef}
+        className="create-new-message-pop-up-content scrollable-div"
+      >
         <div className="container-fluid">
           <div className="row">
             <div className="col-12 d-flex nav-section close-btn-section justify-content-between">

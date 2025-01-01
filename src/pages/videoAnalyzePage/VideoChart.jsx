@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router";
 import { getVideo } from "../../backend/videoApi/videoApi"; // Assume you have a function to fetch video data
+import { useEffect } from "react";
 import { Line } from "react-chartjs-2";
 import {
   Chart as ChartJS,

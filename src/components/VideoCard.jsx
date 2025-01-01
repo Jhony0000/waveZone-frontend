@@ -1,66 +1,95 @@
 import React, { useEffect, useState, useRef } from "react";
-import { socket } from "../socket"; // Make sure socket is correctly initialized
-import { getMixFeed } from "../backend/videoApi/videoApi";
+import { socket } from "../socket"; // Ensure socket is correctly initialized
+import { getMixFeed, updateVideoView } from "../backend/videoApi/videoApi";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { formatDistanceToNow } from "date-fns";
 import CommentPopup from "./popupComponents/CommentPopup";
-import { updateVideoView } from "../backend/videoApi/videoApi";
 import LoadingBar from "react-top-loading-bar";
 
 function VideoCard() {
-  const [isopenComentPopUp, setIsOpenComentPopUp] = useState(false);
+  const [isOpenCommentPopUp, setIsOpenCommentPopUp] = useState(false);
   const ref = useRef(null);
   const [videoId, setVideoId] = useState(null);
-  const [video, setVideo] = useState([]);
-  const [clickHart, setClickHart] = useState({});
-  const [videoLikes, setVideoLikes] = useState({}); // Store like status for each video
+  const [videos, setVideos] = useState([]);
   const userData = useSelector((state) => state.auth.userData);
-  const [watchTime, setWatchTime] = useState({}); // Track watch time for videos
+  const userId = userData?.data?._id;
 
-  const handleHartBtn = (id, type) => {
-    setClickHart((prev) => ({
-      ...prev,
-      [id]: !prev[id], // Toggle the like for the specific post/video
-    }));
-    // Emit like event via Socket.IO for real-time update
-    io.emit("like", { postId: id, userId: userData.data._id, type });
-  };
-
-  const opneCommentPopUp = (videoId) => {
-    setIsOpenComentPopUp(true);
+  const openCommentPopUp = (videoId) => {
+    setIsOpenCommentPopUp(true);
     setVideoId(videoId);
   };
 
   const closeCommentPopUp = () => {
-    setIsOpenComentPopUp(false);
+    setIsOpenCommentPopUp(false);
   };
 
   useEffect(() => {
-    // Listen for real-time like updates
-    socket.on("likeUpdate", ({ postId, likeCount, likedBy }) => {
-      setVideo((prevVideos) =>
+    if (videoId) {
+      socket.emit("joinRoom", videoId); // Ensure the client joins the room
+    }
+  }, [userId]);
+  // Socket event for real-time like updates
+  useEffect(() => {
+    socket.onAny((event, ...args) => {
+      console.log(`Socket event received: ${event}`, args);
+    });
+  }, []);
+
+  useEffect(() => {
+    const handleLikeUpdate = (data) => {
+      console.log("Received likeUpdate event:", data);
+      setVideos((prevVideos) =>
         prevVideos.map((video) =>
-          video._id === postId
+          video._id === data.postId
             ? {
                 ...video,
-                likeCount,
-                isLiked: likedBy.includes(userData.data._id),
+                likeCount: data.likeCount,
+                isLiked: data.likedBy.includes(userId), // Ensure isLiked is updated correctly
               }
             : video
         )
       );
-    });
+    };
+
+    socket.on("likeUpdate", handleLikeUpdate);
 
     return () => {
-      socket.off("likeUpdate");
+      socket.off("likeUpdate", handleLikeUpdate);
     };
-  }, [userData]);
+  }, [userId]);
 
-  const handelLike = (videoId) => {
-    const userId = userData.data._id;
+  useEffect(() => {
+    console.log("Socket connection status:", socket.connected);
+  }, []);
 
-    setVideo((prevVideos) =>
+  // Fetch videos and determine initial like state
+  useEffect(() => {
+    ref.current.continuousStart();
+    const fetchVideos = async () => {
+      try {
+        const response = await getMixFeed(userId);
+        const fetchedVideos = response.data.data.videos.map((videoItem) => ({
+          ...videoItem,
+          isLiked: videoItem.likedBy?.includes(userId), // Check likedBy array
+        }));
+        setVideos(fetchedVideos);
+      } catch (error) {
+        console.error("Error fetching videos:", error);
+      } finally {
+        ref.current.complete();
+      }
+    };
+
+    if (userId) {
+      fetchVideos();
+    }
+  }, [userId]);
+
+  console.log("video", videos);
+  // Optimistic UI update for likes
+  const handleLike = (videoId) => {
+    setVideos((prevVideos) =>
       prevVideos.map((video) =>
         video._id === videoId
           ? {
@@ -74,32 +103,8 @@ function VideoCard() {
       )
     );
 
-    // Emit the like event to the server
     socket.emit("like", { userId, postId: videoId });
   };
-
-  useEffect(() => {
-    ref.current.continuousStart();
-    const fetchVideos = async () => {
-      try {
-        const response = await getMixFeed(userData.data?._id);
-        console.log(response);
-        const fetchedVideos = response.data.data.videos?.map((video) => ({
-          ...video,
-          isLiked: (video.likedBy || []).includes(userData.data._id),
-        }));
-        setVideo(fetchedVideos);
-      } catch (error) {
-        console.error("Error fetching videos:", error);
-      } finally {
-        ref.current.complete(); // Complete the loading bar
-      }
-    };
-
-    if (userData.data._id) {
-      fetchVideos();
-    }
-  }, [userData]);
 
   const handleTimeUpdate = (videoId, currentTime) => {
     setWatchTime((prev) => {
@@ -117,14 +122,14 @@ function VideoCard() {
   return (
     <div className="div video-card">
       <LoadingBar color="#f11946" ref={ref} />
-      {isopenComentPopUp && (
+      {isOpenCommentPopUp && (
         <CommentPopup
           onClose={closeCommentPopUp}
-          userId={userData.data._id}
+          userId={userId}
           postId={videoId}
         />
       )}
-      {video?.map((videoItem) => (
+      {videos.map((videoItem) => (
         <div className="container-fluid post-cards" key={videoItem._id}>
           <div className="row">
             <div className="col-12 post-cards-components mt-2">
@@ -157,7 +162,7 @@ function VideoCard() {
               </div>
 
               <div className="user-content">
-                <div className="title mt-3  blog-content mx-4">
+                <div className="title mt-3 blog-content mx-4">
                   <span>{videoItem.title}</span>
                 </div>
                 <video
@@ -173,27 +178,17 @@ function VideoCard() {
               <div className="post-share-like-view my-3 d-flex justify-content-around">
                 <div className="love-icon">
                   <i
-                    className="fa fa-heart"
-                    style={{
-                      fontSize: "12px",
-                      color: clickHart[videoItem._id]
-                        ? "red"
-                        : "rgb(58, 56, 56)",
-                    }}
-                    onClick={() => handleHartBtn(videoItem._id, "videoItem")}
+                    className={`fa fa-heart ${
+                      videoItem.isLiked ? "liked" : ""
+                    }`}
+                    onClick={() => handleLike(videoItem._id)}
                   />
-                  <span className="mx-1 like-count ">
-                    {videoItem.likeCount}
-                  </span>
+                  <span className="mx-1 like-count">{videoItem.likeCount}</span>
                 </div>
-                {/* <div className="like" onClick={() => handelLike(videoItem._id)}>
-                {videoLikes[videoItem._id]?.isLiked ? "❤️" : "🤍"}
-                  {videoLikes[videoItem._id]?.count || videoItem.likeCount}
-                </div> */}
                 <div className="comments">
                   <i
                     className="ri-chat-1-line like-count"
-                    onClick={() => opneCommentPopUp(videoItem._id)}
+                    onClick={() => openCommentPopUp(videoItem._id)}
                   >
                     <span className="like-count">
                       {videoItem.commentsCount}

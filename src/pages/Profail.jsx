@@ -13,13 +13,14 @@ import { socket } from "../socket";
 import { deleteUserAllVideo } from "../backend/videoApi/videoApi";
 import LoadingBar from "react-top-loading-bar";
 
-import { format, formatDate } from "date-fns";
+import { format } from "date-fns";
 
 function Profail() {
   const ref = useRef(null);
   const navigate = useNavigate();
   const { id } = useParams();
   const userData = useSelector((state) => state.auth.userData);
+  console.log("userId", userData.data._id);
   const [getUserProfaill, setGetUserProfail] = useState({});
   const [isopentEaditeProfailPopUp, setIsOpenEaditeProfailPopUp] =
     useState(false);
@@ -28,7 +29,10 @@ function Profail() {
     ref.current.continuousStart();
     const getProfail = async () => {
       try {
-        const response = await getUserProfail(id);
+        const response = await getUserProfail({
+          id: id,
+          loggedInUserId: userData.data._id,
+        });
         setGetUserProfail(response.data.data);
       } catch (error) {
         console.log("Error fetching profile", error);
@@ -37,20 +41,6 @@ function Profail() {
       }
     };
     if (id) getProfail();
-  }, [id]);
-
-  const followUser = useCallback(() => {
-    socket.emit("toggleFollow", {
-      followerId: id,
-      followingId: userData.data._id,
-    });
-    setGetUserProfail((prev) => ({
-      ...prev,
-      isFollowers: !prev.isFollowers,
-      followersCount: prev.isFollowers
-        ? prev.followersCount - 1
-        : prev.followersCount + 1,
-    }));
   }, [id, userData.data._id]);
 
   const DeleteAccount = async () => {
@@ -58,7 +48,59 @@ function Profail() {
     await deleteAccoutn();
     navigate("/login");
   };
+  useEffect(() => {
+    if (userData.data._id) {
+      socket.emit("joinRoom", userData.data._id);
+    }
+  }, [userData.data._id]);
 
+  useEffect(() => {
+    const handleFollowStatusChange = (data) => {
+      if (data.followingId === id) {
+        setGetUserProfail((prev) => ({
+          ...prev,
+          isFollowers: data.isFollowers,
+          followersCount: data.followersCount,
+        }));
+      }
+    };
+
+    socket.on("followStatusChanged", handleFollowStatusChange);
+
+    return () => {
+      socket.off("followStatusChanged", handleFollowStatusChange);
+    };
+  }, [id]);
+
+  useEffect(() => {
+    setGetUserProfail({}); // Reset the state
+  }, [id]);
+
+  // const followUser = useCallback(() => {
+  //   socket.emit("toggleFollow", {
+  //     followerId: userData.data._id,
+  //     followingId: id,
+  //   });
+  // }, [id, userData.data._id]);
+
+  const followUser = useCallback(() => {
+    // Emit toggleFollow event with correct parameters
+    socket.emit("toggleFollow", {
+      followerId: userData.data._id,
+      followingId: id,
+    });
+
+    // Update the UI based on the follow/unfollow action
+    setGetUserProfail((prev) => ({
+      ...prev,
+      isFollowers: !prev.isFollowers, // Toggle the follow state
+      followersCount: prev.isFollowers
+        ? prev.followersCount - 1 // Decrease followers if unfollowed
+        : prev.followersCount + 1, // Increase followers if followed
+    }));
+  }, [id, userData.data._id]);
+
+  console.log("follow user----", getUserProfaill);
   return (
     <div className="profail-page">
       <LoadingBar color="#f11946" ref={ref} />
@@ -87,17 +129,11 @@ function Profail() {
             />
             <div className="div user-name-section mt-4">
               <div className="ful-namee">
-                <h6 className="fw-bold ">
-                  {getUserProfaill.FulName}
-                  xcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxxcxcxcx
-                </h6>
+                <h6 className="fw-bold ">{getUserProfaill.FulName}</h6>
               </div>
 
               <div className="user-namee ">
-                <span>
-                  @{getUserProfaill.userName}
-                  xcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxcxc
-                </span>
+                <span>@{getUserProfaill.userName}</span>
               </div>
             </div>
 
@@ -155,32 +191,7 @@ function Profail() {
           )}
         </div>
       </div>
-      <div className="row">
-        <div className="col-12">
-          <div className="div user-profail-edit-delete-btn-section-mobile px-3">
-            {id === userData.data._id && (
-              <div className="edite-profailt-btnn ">
-                <button onClick={() => setIsOpenEaditeProfailPopUp(true)}>
-                  Edit Profile
-                </button>
-                <button className="delete-account" onClick={DeleteAccount}>
-                  Delete Account
-                </button>
-              </div>
-            )}
-            {id !== userData.data._id && (
-              <button
-                className={`btn w-25 ${
-                  getUserProfaill.isFollowers ? "btn-danger" : "btn-success"
-                }`}
-                onClick={followUser}
-              >
-                {getUserProfaill.isFollowers ? "Unfollow" : "Follow"}
-              </button>
-            )}
-          </div>
-        </div>
-      </div>
+
       {/* Navigation */}
       <div className="row  mt-5 d-flex mx-3">
         <div className="div ">

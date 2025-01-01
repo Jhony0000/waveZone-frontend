@@ -4,7 +4,7 @@ import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import VideoUploadPopup from "../videoUplodPopUp";
-import LogoutButton from "./LogoutButton";
+
 import { useDispatch } from "react-redux";
 import { logOutUser } from "../../backend/userApi/apiService";
 import { logout } from "../../store/AuthSlice";
@@ -136,7 +136,9 @@ function Sidenav() {
         )}
         {isBlogFromOpen && <BlogFromPopUp onClose={BlogFromClose} />}
         <div className=" border-nav pt-5">
-          <h5 className="fw-bold logo1 d-md-none d-lg-block">WaveZone</h5>
+          <h5 className="fw-bold logo1 d-md-none d-lg-block text-primary">
+            WaveZone
+          </h5>
           <ul className="pt-4">
             {navItems.map((items) =>
               items.active ? (

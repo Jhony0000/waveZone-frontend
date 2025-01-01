@@ -3,9 +3,12 @@ import { useSelector } from "react-redux";
 import { getUserNotification } from "../backend/notification/notificationApi";
 import { socket } from "../socket/index.js";
 import LoadingBar from "react-top-loading-bar";
+import DeletePopUp from "../components/popupComponents/DeletePopUp.jsx";
 
 function NotificationPage() {
   const ref = useRef();
+  const [isOPenDeletePopUp, setIsOpenDeletePopUP] = useState(false);
+  const [notificationId, setNotificationId] = useState(null);
   const [notificationProfail, setNotificationProfail] = useState([]);
   const userData = useSelector((state) => state.auth.userData);
   useEffect(() => {
@@ -38,9 +41,27 @@ function NotificationPage() {
     };
   }, [userData.data._id]);
 
+  const OpenDeleteMessage = (id) => {
+    setIsOpenDeletePopUP(true);
+    setNotificationId(id);
+  };
+
+  const closeDeleteMessage = () => {
+    setIsOpenDeletePopUP(false);
+    setNotificationId(null);
+  };
+
   return (
     <div className="container-fluid">
       <LoadingBar color="#f11946" ref={ref} />
+      {isOPenDeletePopUp && (
+        <DeletePopUp
+          id={notificationId}
+          className={`deletePopUP`}
+          heading="Delete notification"
+          onClose={closeDeleteMessage}
+        />
+      )}
       <div className="row">
         <div className="col-12 d-flex  justify-content-center">
           <div className="notification-page">
@@ -71,7 +92,10 @@ function NotificationPage() {
                   </span>
                 </div>
                 <div className="notification-more-icon">
-                  <i className="ri-more-2-fill mx-2 mt-2"></i>
+                  <i
+                    className="ri-more-2-fill mx-2 mt-2"
+                    onClick={() => OpenDeleteMessage(notification._id)}
+                  ></i>
                 </div>
               </div>
             ))}

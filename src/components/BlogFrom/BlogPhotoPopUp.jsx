@@ -56,7 +56,7 @@ function BlogPhotoPopUp({ blogTitle, blogContent, onClose, parantClose }) {
           <input
             id="video-upload"
             type="file"
-            accept="image/png, image/gif, image/jpeg"
+            accept="video/* image/png, image/gif, image/jpeg"
             onChange={(e) => getPhoto(e.target.files[0])}
             style={{ display: "none" }}
           />

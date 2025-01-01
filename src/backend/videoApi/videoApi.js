@@ -1,4 +1,4 @@
-import axios, { formToJSON } from 'axios'
+import axios from 'axios'
 
 const videoApiUrl = 'http://localhost:8000/api/v1/videos';
 

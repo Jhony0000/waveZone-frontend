@@ -1,52 +1,7 @@
-// import { StrictMode } from "react";
-// import { createRoot } from "react-dom/client";
-// import App from "./App.jsx";
-// import BusinessApp from "./BusinessApp.jsx";
-// import "./App.css";
-// import store from "./store/store.js";
-// import businessStore from "./store/bussiness.store.js";
-// import { Provider as RegularUserProvider } from "react-redux";
-// import { Provider as BusinessUserProvider } from "react-redux";
-// import { createBrowserRouter, RouterProvider } from "react-router-dom";
-
-// // Import your routes
-// import { regularUserRoutes, businessUserRoutes } from "./routs.jsx";
-
-// // Create routers
-// const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: (
-//* <RegularUserProvider store={store}>
-//         <App />
-//       </RegularUserProvider>
-//     ),
-//     children: regularUserRoutes,
-//   },
-//   {
-//     path: "/business",
-//     element: (
-//       <BusinessUserProvider store={businessStore}>
-//         <BusinessApp />
-//       </BusinessUserProvider>
-//     ),
-//     children: businessUserRoutes,
-//   },
-// ]);
-
-// createRoot(document.getElementById("root")).render(
-//   <StrictMode>
-//     <RouterProvider router={router} />
-//   </StrictMode>
-// );
-
-// this is main rouste
-
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
 import "./App.css";
-import { Navigate } from "react-router-dom";
 import store from "./store/store.js";
 import { Provider as RegularUserProvider } from "react-redux";
 import { Provider as businessUserProvider } from "react-redux";
@@ -67,6 +22,13 @@ import NotificationPage from "./pages/NotificationPage.jsx";
 import SearchPage from "./pages/SearchPage.jsx";
 import MessageSendOutLet from "./pages/messageSendOutlet/MessageSendOutLet.jsx";
 import VideoChart from "./pages/videoAnalyzePage/VideoChart.jsx";
+import BusinessApp from "./BusinessApp.jsx";
+import BusinessHome from "./pages/BussinessPage/Home.jsx";
+import { BusinessAuthLayout } from "./bussinessComponents/index.js";
+import {
+  BusinessLoginPage,
+  BusinessSginupPage,
+} from "../src/pages/BussinessPage/index.js";
 
 const router = createBrowserRouter([
   {
@@ -85,7 +47,7 @@ const router = createBrowserRouter([
         path: "/login",
         element: (
           <AuthLayout authentication={false}>
-            <LoginPage />
+            <LoginPage />,
           </AuthLayout>
         ),
       },
@@ -93,7 +55,7 @@ const router = createBrowserRouter([
         path: "/sginup",
         element: (
           <AuthLayout authentication={false}>
-            <SginupPage />
+            <SginupPage />,
           </AuthLayout>
         ),
       },
@@ -198,9 +160,37 @@ const router = createBrowserRouter([
           </AuthLayout>
         ),
       },
+
+      // bussiness routes
+    ],
+  },
+  {
+    path: "/business",
+    element: <BusinessApp />,
+    children: [
       {
-        path: "*",
-        element: <Navigate to="/" replace />,
+        path: "",
+        element: (
+          <BusinessAuthLayout authentication>
+            <BusinessHome />
+          </BusinessAuthLayout>
+        ),
+      },
+      {
+        path: "/business/sginup",
+        element: (
+          <BusinessAuthLayout authentication={false}>
+            <BusinessSginupPage />
+          </BusinessAuthLayout>
+        ),
+      },
+      {
+        path: "/business/login",
+        element: (
+          <BusinessAuthLayout authentication={false}>
+            <BusinessLoginPage />
+          </BusinessAuthLayout>
+        ),
       },
     ],
   },

@@ -1,0 +1,35 @@
+business app features
+
+1.manage product or any services.
+
+2.pyment getway.
+
+3.order status panding,complate,dinied and total order count.
+
+3.track order deliver or not.
+
+4.delivary time.
+
+5.who by the product.
+
+6.product review.
+
+7.selers rivew . this seler good or bad.
+
+8. sellers status.
+
+9.total profit.
+
+10.total sel.
+
+11.this mangth order count.
+
+12.total worker , worker detels phone noumber or img and other , distribute worker pyment.
+
+13. create own page for manage product or service and disply byers.
+
+
+
+
+
+

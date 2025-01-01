@@ -61,6 +61,8 @@ function BlogCard() {
   const handelLike = (blogId) => {
     const userId = userData.data._id;
 
+    // Emit the like event to the server
+    socket.emit("like", { userId, postId: blogId });
     setBlogFeed((prevBlog) =>
       prevBlog.map((blog) =>
         blog._id === blogId
@@ -72,9 +74,6 @@ function BlogCard() {
           : blog
       )
     );
-
-    // Emit the like event to the server
-    socket.emit("like", { userId, postId: blogId });
   };
 
   const toggoleContent = () => {

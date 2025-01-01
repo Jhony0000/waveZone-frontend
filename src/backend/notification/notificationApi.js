@@ -5,7 +5,7 @@ const notification_api_url = 'http://localhost:8000/api/v1/notification';
 const getUserNotification = async(userId) => {
     try {
         const token = localStorage.getItem('accessToken');
-        return await axios.post(`${notification_api_url}/get-user-notification`,{userId},{
+        return await axios.post(`${notification_api_url}/get-notification`,{userId},{
             withCredentials:true,
             headers:{
                 Authorization:`Bearer ${token}`
