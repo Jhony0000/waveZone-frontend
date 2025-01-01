@@ -1,12 +1,12 @@
 import React from "react";
-import { PostFrom, Container } from "../components/index";
+import { PostFrom } from "../components/index";
 
 function AddPost() {
   return (
     <div>
-      <Container>
-        <PostFrom />
-      </Container>
+      {/* <Container> */}
+      <PostFrom />
+      {/* </Container> */}
     </div>
   );
 }
