@@ -1,12 +1,12 @@
 import React from "react";
-import { Container, CreateFrom } from "../components/index";
+import { CreateFrom } from "../components/index";
 
 function CreateProfail() {
   return (
     <div>
-      <Container>
-        <CreateFrom />
-      </Container>
+      {/* <Container> */}
+      <CreateFrom />
+      {/* </Container> */}
     </div>
   );
 }
