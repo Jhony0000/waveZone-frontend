@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const user_api_url = 'http://localhost:8000/api/v1/users';
+const user_api_url = 'https://aee8-103-209-109-229.ngrok-free.app/api/v1/users';
 
 const registerUser = async ({ FulName, email, password, userName }) => {
     const formData = new FormData();
