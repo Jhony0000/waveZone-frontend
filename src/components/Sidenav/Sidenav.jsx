@@ -78,7 +78,7 @@ function Sidenav() {
     },
     {
       name: "Profail",
-      url: `/profail/${userData.data._id}`,
+      url: `/profail/${userData.data?._id}`,
       active: auhtStutes,
       icon: "ri-user-line",
     },
