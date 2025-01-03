@@ -36,7 +36,7 @@ const loginUser = async (data) => {
         // console.log('data' , data)
       
         const response = await axios.post(`${user_api_url}/login` , data)
-        // console.log('tokens',response)
+        console.log('tokens',response)
         const { accessToken, refreshToken } = response.data.data;
  
         if (accessToken && refreshToken) {
