@@ -26,8 +26,8 @@ function Sidenav() {
   const auhtStutes = useSelector((state) => state.auth.status);
   const userData = useSelector((state) => state.auth.userData);
 
-  console.log("length", notificationLength);
-  console.log("side nav", userData.data._id);
+  // console.log("length", notificationLength);
+  // console.log("side nav", userData.data._id);
   const BlogFromOPen = () => {
     setIsBlogFromOpen(true);
   };
@@ -113,14 +113,14 @@ function Sidenav() {
         console.error("notification coung erorr notifications:", error);
       }
     };
-    if (userData.data._id) {
+    if (userData.data?._id) {
       notificationsCount();
     }
-  }, [userData.data._id]);
+  }, [userData.data?._id]);
 
   const readNotifications = async () => {
     try {
-      await readNotification(userData.data._id);
+      await readNotification(userData.data?._id);
       // setNotificationLenth(notifications.data.data.length);
     } catch (error) {
       console.error("read notifications:", error);
